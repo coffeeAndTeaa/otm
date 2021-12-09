@@ -16,6 +16,7 @@ import com.jingyu.otm.repository.LoginRepository;
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "LoginActivity";
 
     ActivityLoginBinding binding;
     @Override
@@ -40,10 +41,11 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             Long userId = user.id_user;
                             Log.d("LoginActivity", userId.toString());
+                            Log.d("LoginActivity", userId.toString());
+                            Log.d(TAG, "onClick: ");
                             startActivity(new Intent(LoginActivity.this, HomeActivity.class)
                                 .putExtra("userId", userId)
                             );
-
                         }
                     } catch (ExecutionException e) {
                         e.printStackTrace();
