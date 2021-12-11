@@ -3,12 +3,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     tools:context=".ui.UpdateFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
+
     <TextView
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="update_fragment" />
+        android:text="Update Your Information"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        />
+
+    <EditText
+        android:id="@+id/editUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:padding="10dp"
+        android:hint="Edit username" />
+
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:padding="10dp"
+        android:hint="Edit password"
+        android:inputType="textPassword"/>
+
+
+    <EditText
+        android:id="@+id/editHeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="220dp"
+        android:padding="10dp"
+        android:hint="Edit height"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/editWeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="290dp"
+        android:padding="10dp"
+        android:hint="Edit weight"
+        android:inputType="numberDecimal"/>
+
+    <EditText
+        android:id="@+id/editAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="360dp"
+        android:padding="10dp"
+        android:hint="Edit age"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/saveChanges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text= "Save Changes"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:layout_gravity="center"/>
+
 
 </FrameLayout>
