@@ -16,6 +16,8 @@ import com.jingyu.otm.databinding.ActivityHomeBinding;
 public class HomeActivity extends AppCompatActivity {
 //    private ActivityHomeBinding binding;
     private NavController navController;
+    private Long userId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,17 @@ public class HomeActivity extends AppCompatActivity {
         navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(navView, navController);
         NavigationUI.setupActionBarWithNavController(this, navController);
+
+        // get the userId passed in from the login activity
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            userId = extras.getLong("userId");
+            //The key argument here must match that used in the other activity
+        }
+    }
+
+    public Long giveMeUserId() {
+        return userId;
     }
 
     @Override

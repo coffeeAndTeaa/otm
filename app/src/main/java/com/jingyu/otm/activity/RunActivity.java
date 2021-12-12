@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.jingyu.otm.R;
 import com.jingyu.otm.databinding.ActivityRunBinding;
+import com.jingyu.otm.db.Run;
 import com.jingyu.otm.repository.RunRepository;
 
 public class RunActivity extends AppCompatActivity  {
@@ -32,6 +33,7 @@ public class RunActivity extends AppCompatActivity  {
         binding = ActivityRunBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        repo = new RunRepository();
 
         // set up the sensor
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -93,7 +95,8 @@ public class RunActivity extends AppCompatActivity  {
         binding.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Run run = new Run(1L,"this is a test run", seconds, steps);
+                repo.insertRun(run);
             }
         });
 
@@ -124,16 +127,17 @@ public class RunActivity extends AppCompatActivity  {
 
                 @Override
                 public void onAccuracyChanged(Sensor sensor, int i) {
-
                 }
             };
+
+            sensorManager.registerListener(stepDetector, sensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
 
     }
 
-    public void getPedometer() {
-
-    }
+//    public void getPedometer() {
+//
+//    }
 
     public void onClickStart() {
         running = true;
