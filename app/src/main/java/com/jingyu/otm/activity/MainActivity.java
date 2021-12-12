@@ -1,9 +1,11 @@
-package com.jingyu.otm;
+package com.jingyu.otm.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.jingyu.otm.R;
 
 public class MainActivity extends AppCompatActivity {
 

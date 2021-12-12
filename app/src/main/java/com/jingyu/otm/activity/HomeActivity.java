@@ -1,4 +1,4 @@
-package com.jingyu.otm;
+package com.jingyu.otm.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.jingyu.otm.R;
 import com.jingyu.otm.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
