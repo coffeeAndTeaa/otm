@@ -32,10 +32,6 @@ public class RunRepository {
         allUsers = userDao.getAllUsers();
     }
 
-
-
-
-
     public void updateUser(User user) {
         new UpdateUserAsyncTask(userDao).execute(user);
     }

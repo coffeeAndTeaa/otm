@@ -1,4 +1,4 @@
-package com.jingyu.otm;
+package com.jingyu.otm.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,10 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.jingyu.otm.databinding.ActivityRegisterBinding;
-import com.jingyu.otm.db.RunDao;
-import com.jingyu.otm.db.RunDataBase;
 import com.jingyu.otm.db.User;
-import com.jingyu.otm.db.UserDao;
 import com.jingyu.otm.repository.LoginRepository;
 
 public class RegisterActivity extends AppCompatActivity {

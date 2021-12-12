@@ -1,4 +1,4 @@
-package com.jingyu.otm;
+package com.jingyu.otm.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
