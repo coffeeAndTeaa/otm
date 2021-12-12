@@ -6,11 +6,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.jingyu.otm.R;
+import com.jingyu.otm.activity.HomeActivity;
+import com.jingyu.otm.databinding.FragmentUpdateBinding;
+import com.jingyu.otm.db.User;
+import com.jingyu.otm.repository.RunRepository;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +26,9 @@ import com.jingyu.otm.R;
  * create an instance of this fragment.
  */
 public class UpdateFragment extends Fragment {
+    private static final String TAG = "UpdateFragment";
+    FragmentUpdateBinding binding;
+    private RunRepository repository;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +46,50 @@ public class UpdateFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Long Id = ((HomeActivity)getActivity()).giveMeUserId();
+        Log.d(TAG, "now the user is" + Id.toString());
+
+        binding.saveChanges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = binding.editUsername.toString();
+                Double height = Double.parseDouble(binding.editHeight.toString());
+                Integer age = Integer.parseInt(binding.editAge.toString());
+                Double weight = Double.parseDouble(binding.editWeight.toString());
+                String password = binding.editPassword.toString();
+
+
+                try {
+                    User user = repository.getUser(Id);
+                    if (!name.isEmpty()) {
+                        user.name = name;
+                    }
+
+                    if (height != null) {
+                        user.height = height;
+                    }
+
+                    if (age != null) {
+                        user.age = age;
+                    }
+
+                    if (weight != null) {
+                        user.weight = weight;
+                    }
+
+                    if (!password.isEmpty()) {
+                        user.password = name;
+                    }
+                    repository.updateUser(user);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
     }
 
     /**
@@ -68,6 +123,10 @@ public class UpdateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_update, container, false);
+        repository = new RunRepository();
+        binding = FragmentUpdateBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
+
+
 }

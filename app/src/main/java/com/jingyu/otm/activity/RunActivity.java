@@ -39,37 +39,37 @@ public class RunActivity extends AppCompatActivity  {
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        // if sensor is null we just give a message
-        if (sensor == null) {
-            Toast.makeText(this, "No sensor detected on this device", Toast.LENGTH_SHORT).show();
-        } else {
-            SensorEventListener stepDetector = new SensorEventListener() {
-
-                @Override
-                public void onSensorChanged(SensorEvent sensorEvent) {
-                    if (sensorEvent!= null && running){
-                        float x_acceleration = sensorEvent.values[0];
-                        float y_acceleration = sensorEvent.values[1];
-                        float z_acceleration = sensorEvent.values[2];
-
-                        double Magnitude = Math.sqrt(x_acceleration*x_acceleration + y_acceleration*y_acceleration + z_acceleration*z_acceleration);
-                        double MagnitudeDelta = Magnitude - MagnitudePrevious;
-                        MagnitudePrevious = Magnitude;
-
-                        if (MagnitudeDelta > 6){
-                            steps++;
-                        }
-                        binding.steps.setText(steps.toString());
-                    }
-
-                }
-
-                @Override
-                public void onAccuracyChanged(Sensor sensor, int i) {
-
-                }
-            };
-        }
+//        // if sensor is null we just give a message
+//        if (sensor == null) {
+//            Toast.makeText(this, "No sensor detected on this device", Toast.LENGTH_SHORT).show();
+//        } else {
+//            SensorEventListener stepDetector = new SensorEventListener() {
+//
+//                @Override
+//                public void onSensorChanged(SensorEvent sensorEvent) {
+//                    if (sensorEvent!= null && running){
+//                        float x_acceleration = sensorEvent.values[0];
+//                        float y_acceleration = sensorEvent.values[1];
+//                        float z_acceleration = sensorEvent.values[2];
+//
+//                        double Magnitude = Math.sqrt(x_acceleration*x_acceleration + y_acceleration*y_acceleration + z_acceleration*z_acceleration);
+//                        double MagnitudeDelta = Magnitude - MagnitudePrevious;
+//                        MagnitudePrevious = Magnitude;
+//
+//                        if (MagnitudeDelta > 6){
+//                            steps++;
+//                        }
+//                        binding.steps.setText(steps.toString());
+//                    }
+//
+//                }
+//
+//                @Override
+//                public void onAccuracyChanged(Sensor sensor, int i) {
+//
+//                }
+//            };
+//        }
 
         binding.startButton.setOnClickListener(new View.OnClickListener() {
             @Override

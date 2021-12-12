@@ -92,10 +92,26 @@ public class RunRepository {
         }
     }
 
+    // get the bmi value
+    public Double getTheBmiForUser(User user) {
+        return user.weight / (user.height * user.height);
+    }
 
+    public User getUser(Long userId) throws ExecutionException, InterruptedException {
+        return new GetUserAsyncTask(userDao).execute(userId).get();
+    }
 
+    private static class GetUserAsyncTask extends AsyncTask<Long, Void, User> {
+        private UserDao userDao;
 
+        private GetUserAsyncTask(UserDao userDao) {
+            this.userDao = userDao;
+        }
 
-
+        @Override
+        protected User doInBackground(Long... longs) {
+            return userDao.getUserById(longs[0]);
+        }
+    }
 
 }

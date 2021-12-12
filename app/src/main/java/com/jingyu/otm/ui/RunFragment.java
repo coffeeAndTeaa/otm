@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jingyu.otm.R;
+import com.jingyu.otm.databinding.FragmentRunBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +17,7 @@ import com.jingyu.otm.R;
  * create an instance of this fragment.
  */
 public class RunFragment extends Fragment {
+    private FragmentRunBinding binding;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

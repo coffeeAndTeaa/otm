@@ -17,7 +17,7 @@ public class User {
 
     public Double weight;
 
-    public Double bmi;
+//    public Double bmi;
 
     public String password;
 
@@ -27,7 +27,7 @@ public class User {
         this.age = age;
         this.weight = weight;
         this.password = password;
-        bmi = weight / (height * height);
+//        bmi = weight / (height * height);
     }
 
 }
