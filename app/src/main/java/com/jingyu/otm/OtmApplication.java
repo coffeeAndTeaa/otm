@@ -43,11 +43,11 @@ public class OtmApplication extends Application {
             User faker = new User("faker", 1.78, 25, 77.0, "123456");
             userDao.insertUser(Bruce);
             userDao.insertUser(faker);
-            Run r1 = new Run(Bruce.id_user, "Bruce First run");
-            Run r2 = new Run(Bruce.id_user, "Bruce Second run");
-            Run r3 = new Run(Bruce.id_user, "Bruce Third run");
-            Run r4 = new Run(faker.id_user, "faker First run");
-            Run r5 = new Run(faker.id_user, "faker First run");
+            Run r1 = new Run(Bruce.id_user, "Bruce First run", 10, 100);
+            Run r2 = new Run(Bruce.id_user, "Bruce Second run", 11, 101);
+            Run r3 = new Run(Bruce.id_user, "Bruce Third run", 12, 103);
+            Run r4 = new Run(faker.id_user, "faker First run", 10, 10);
+            Run r5 = new Run(faker.id_user, "faker First run", 10, 10);
             runDao.insertRun(r1);
             runDao.insertRun(r2);
             runDao.insertRun(r3);

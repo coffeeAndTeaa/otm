@@ -16,8 +16,14 @@ public class Run {
 
     public String runName;
 
-    public Run(Long id_user, String runName) {
+    public Integer seconds;
+
+    public Integer steps;
+
+    public Run(Long id_user, String runName, Integer seconds, Integer steps) {
         this.id_user = id_user;
         this.runName = runName;
+        this.seconds = seconds;
+        this.steps = steps;
     }
 }
