@@ -30,7 +30,7 @@ public interface UserDao {
     @Query("SELECT * FROM user Where name=(:name) and password=(:password)")
     User login(String name, String password);
 
-    @Query("SELECT * FROM user Where id_user(:id)")
+    @Query("SELECT * FROM user Where id_user=(:id)")
     User getUserById(Long id);
 
 }

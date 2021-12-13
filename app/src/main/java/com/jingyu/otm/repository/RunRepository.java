@@ -19,21 +19,17 @@ import java.util.concurrent.ExecutionException;
 
 public class RunRepository {
 
-    private UserDao userDao;
-    private RunDao runDao;
+    private final RunDataBase dataBase;
     private LiveData<List<User>> allUsers;
 
 //    private LiveData<List<Run>>
 
     public RunRepository() {
-        RunDataBase database = OtmApplication.getDataBase();
-        UserDao userDao = database.userDao();
-        RunDao runDao = database.runDao();
-        allUsers = userDao.getAllUsers();
+        dataBase = OtmApplication.getDataBase();
     }
 
     public void updateUser(User user) {
-        new UpdateUserAsyncTask(userDao).execute(user);
+        new UpdateUserAsyncTask(dataBase.userDao()).execute(user);
     }
 
     private static class UpdateUserAsyncTask extends AsyncTask<User, Void, Void> {
@@ -57,7 +53,7 @@ public class RunRepository {
     }
 
     public void insertRun(Run run) {
-        new InsertRunAsyncTask(runDao).execute();
+        new InsertRunAsyncTask(dataBase.runDao()).execute();
     }
 
     private static class InsertRunAsyncTask extends AsyncTask<Run, Void, Void> {
@@ -76,7 +72,7 @@ public class RunRepository {
     }
 
     public  LiveData<List<Run>> getAllRunsForUser(User user) throws ExecutionException, InterruptedException {
-        return new GetAllRunsForUserAsyncTask(runDao).execute(user).get();
+        return new GetAllRunsForUserAsyncTask(dataBase.runDao()).execute(user).get();
     }
 
     private static class GetAllRunsForUserAsyncTask extends AsyncTask<User, Void, LiveData<List<Run>>> {
@@ -98,7 +94,7 @@ public class RunRepository {
     }
 
     public User getUser(Long userId) throws ExecutionException, InterruptedException {
-        return new GetUserAsyncTask(userDao).execute(userId).get();
+        return new GetUserAsyncTask(dataBase.userDao()).execute(userId).get();
     }
 
     private static class GetUserAsyncTask extends AsyncTask<Long, Void, User> {
