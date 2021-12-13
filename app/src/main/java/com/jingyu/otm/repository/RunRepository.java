@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 public class RunRepository {
 
     private final RunDataBase dataBase;
-    private LiveData<List<User>> allUsers;
+    private LiveData<List<Run>> allRuns;
 
 //    private LiveData<List<Run>>
 
@@ -48,9 +48,7 @@ public class RunRepository {
 
     }
 
-    public LiveData<List<User>> getAllUsers() {
-        return allUsers;
-    }
+
 
     public void insertRun(Run run) {
         new InsertRunAsyncTask(dataBase.runDao()).execute();

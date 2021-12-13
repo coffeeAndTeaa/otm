@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.jingyu.otm.ui.UserFragment"
+        android:name="com.jingyu.otm.ui.HomeFragment"
         android:label="user"
         tools:layout="@layout/fragment_home" />
     <fragment
