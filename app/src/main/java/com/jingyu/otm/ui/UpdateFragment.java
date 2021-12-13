@@ -52,11 +52,11 @@ public class UpdateFragment extends Fragment {
         binding.saveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = binding.editUsername.toString();
-                Double height = Double.parseDouble(binding.editHeight.toString());
-                Integer age = Integer.parseInt(binding.editAge.toString());
-                Double weight = Double.parseDouble(binding.editWeight.toString());
-                String password = binding.editPassword.toString();
+                String name = binding.editUsername.getText().toString();
+                String height = binding.editHeight.getText().toString();
+                String age = binding.editAge.getText().toString();
+                String weight = binding.editWeight.getText().toString();
+                String password = binding.editPassword.getText().toString();
 
 
                 try {
@@ -65,22 +65,26 @@ public class UpdateFragment extends Fragment {
                         user.name = name;
                     }
 
-                    if (height != null) {
-                        user.height = height;
+                    if (!height.isEmpty()) {
+                        Log.d(TAG, "height is" + height);
+                        user.height = Double.parseDouble(height);
                     }
 
-                    if (age != null) {
-                        user.age = age;
+                    if (!age.isEmpty() ) {
+                        user.age = Integer.parseInt(age);;
                     }
 
-                    if (weight != null) {
-                        user.weight = weight;
+                    if (!weight.isEmpty()) {
+                        user.weight = Double.parseDouble(weight);;
                     }
 
                     if (!password.isEmpty()) {
                         user.password = name;
                     }
                     repository.updateUser(user);
+                    Toast.makeText(getActivity(), "change saved", Toast.LENGTH_LONG).show();
+                    user = repository.getUser(Id);
+                    Log.d(TAG, "new height " + user.height);
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
