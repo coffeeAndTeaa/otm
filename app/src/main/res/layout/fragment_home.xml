@@ -1,15 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.UserFragment">
+    tools:context=".ui.UserFragment"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+        android:layout_marginTop="100dp"
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_run" />
+
     <TextView
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="home_fragment" />
+        android:text="Your Activity"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/display_date"
+        android:text="Date"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_marginTop="30dp"
+        android:textAlignment="center"
+        />
+
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/display_username"
+        android:text="Username: "
+        android:textStyle="bold"
+        android:layout_marginTop="60dp"
+        android:textSize="20dp"
+        android:gravity="left"
+        android:textAlignment="gravity"
+        />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/display_BMI"
+        android:text="BMI: "
+        android:textStyle="bold"
+        android:layout_marginTop="100dp"
+        android:textSize="20dp"
+        android:gravity="left"
+        android:textAlignment="gravity"
+        />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/display_steps"
+        android:text="Total Steps: "
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginTop="140dp"
+        android:gravity="left"
+        android:textAlignment="gravity"
+        />
+
 
 
 
