@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20sp"
         android:gravity="center_vertical"
-        android:hint="Enter height"
+        android:hint="Enter height (m)"
         android:inputType="number" />
 
     <EditText
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20sp"
         android:gravity="center_vertical"
-        android:hint="Enter weight"
+        android:hint="Enter weight (kg)"
         android:inputType="numberDecimal" />
 
     <EditText

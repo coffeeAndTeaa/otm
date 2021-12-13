@@ -35,20 +35,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/run_name"
-            android:text="Steps" />
+            android:text="Steps: " />
         <TextView
-            android:id="@+id/run_time"
+            android:id="@+id/run_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/run_steps"
-            android:text="Time" />
+            android:text="Duration: " />
 
         <TextView
             android:id="@+id/calories_burned"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/run_time"
-            android:text="Calories Burned" />
+            android:layout_below="@id/run_duration"
+            android:text="Calories Burned: " />
 
 
 
