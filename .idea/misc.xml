@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jd_fr/Downloads/SWE_Final/otm/app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="..\:/Users/jd_fr/Downloads/SWE_Final/otm/app/src/main/res/layout/activity_login.xml" value="0.16621376811594202" />
+        <entry key="..\:/Users/jd_fr/Downloads/SWE_Final/otm/app/src/main/res/layout/activity_register.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/jd_fr/Downloads/SWE_Final/otm/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/jd_fr/Downloads/SWE_Final/otm/app/src/main/res/layout/fragment_run.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/circle.xml" value="0.37334014300306434" />
         <entry key="app/src/main/res/drawable/ic_pen.xml" value="0.37334014300306434" />
         <entry key="app/src/main/res/drawable/ic_user.xml" value="0.37334014300306434" />

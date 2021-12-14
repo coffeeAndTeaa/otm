@@ -58,7 +58,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.RunsViewHolder
     @Override
     public void onBindViewHolder(@NonNull RunsViewHolder holder, int position) {
         Run currentRun = runs.get(position);
-        holder.runNameView.setText("Running name " + currentRun.runName);
+        holder.runNameView.setText("Running name " + currentRun.runName); // TODO: Fix this runName not populating properly.
         holder.runDurationView.setText("Running duration " + currentRun.seconds + " s");
         holder.runStepView.setText("Running steps" + currentRun.steps.toString());
         Double cal = currentRun.steps * 0.04;

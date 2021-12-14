@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment {
                             Log.d(TAG, "Username is " + user.name);
                             binding.displayUsername.setText(user.name);
                             Double bmi = repository.getTheBmiForUser(user);
-                            String BMI = String.format("BMI: %2f",bmi);
+                            String BMI = String.format("BMI: %2.1f",bmi);
                             binding.displayBMI.setText(BMI);
                         }
                 );
