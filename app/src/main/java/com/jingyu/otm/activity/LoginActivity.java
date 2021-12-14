@@ -33,7 +33,8 @@ public class LoginActivity extends AppCompatActivity {
                 LoginRepository repo = new LoginRepository();
                 if (name.isEmpty() || password.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "please input your name and password", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                 else {
                     try {
                         User user = repo.login(name, password);
                         if (user == null) {

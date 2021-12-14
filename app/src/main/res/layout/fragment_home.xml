@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:id="@+id/display_steps"
-        android:text="Total Steps: "
+        android:text="Suggest Steps: "
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginTop="140dp"
