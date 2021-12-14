@@ -34,69 +34,48 @@ public class RunActivity extends AppCompatActivity  {
         View view = binding.getRoot();
         setContentView(view);
         repo = new RunRepository();
+        runTimer();
 
         // set up the sensor
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-//        // if sensor is null we just give a message
-//        if (sensor == null) {
-//            Toast.makeText(this, "No sensor detected on this device", Toast.LENGTH_SHORT).show();
-//        } else {
-//            SensorEventListener stepDetector = new SensorEventListener() {
-//
-//                @Override
-//                public void onSensorChanged(SensorEvent sensorEvent) {
-//                    if (sensorEvent!= null && running){
-//                        float x_acceleration = sensorEvent.values[0];
-//                        float y_acceleration = sensorEvent.values[1];
-//                        float z_acceleration = sensorEvent.values[2];
-//
-//                        double Magnitude = Math.sqrt(x_acceleration*x_acceleration + y_acceleration*y_acceleration + z_acceleration*z_acceleration);
-//                        double MagnitudeDelta = Magnitude - MagnitudePrevious;
-//                        MagnitudePrevious = Magnitude;
-//
-//                        if (MagnitudeDelta > 6){
-//                            steps++;
-//                        }
-//                        binding.steps.setText(steps.toString());
-//                    }
-//
-//                }
-//
-//                @Override
-//                public void onAccuracyChanged(Sensor sensor, int i) {
-//
-//                }
-//            };
-//        }
-
         binding.startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 onClickStart();
+                running = true;
             }
         });
 
         binding.stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickStop();
+                running = false;
             }
         });
 
         binding.resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickReset();
+                running = false;
+                seconds = 0;
+                steps = 0;
             }
         });
 
         binding.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Run run = new Run(1L,"this is a test run", seconds, steps);
-                repo.insertRun(run);
+                Bundle extras = getIntent().getExtras();
+                Long userId = extras.getLong("userId");
+                String input = binding.runName.getText().toString();
+                if (input == null) {
+                    Toast.makeText(getApplicationContext(), "you need to give a run name", Toast.LENGTH_SHORT).show();
+                } else {
+                    Run run = new Run(userId, "this is a test run", seconds, steps);
+                    repo.insertRun(run);
+                    finish();
+                }
             }
         });
 
@@ -108,22 +87,23 @@ public class RunActivity extends AppCompatActivity  {
 
                 @Override
                 public void onSensorChanged(SensorEvent sensorEvent) {
-                    if (sensorEvent!= null && running){
+                    if (sensorEvent != null && running) {
                         float x_acceleration = sensorEvent.values[0];
                         float y_acceleration = sensorEvent.values[1];
                         float z_acceleration = sensorEvent.values[2];
 
-                        double Magnitude = Math.sqrt(x_acceleration*x_acceleration + y_acceleration*y_acceleration + z_acceleration*z_acceleration);
+                        double Magnitude = Math.sqrt(x_acceleration * x_acceleration
+                                + y_acceleration * y_acceleration + z_acceleration * z_acceleration);
                         double MagnitudeDelta = Magnitude - MagnitudePrevious;
                         MagnitudePrevious = Magnitude;
 
-                        if (MagnitudeDelta > 6){
+                        if (MagnitudeDelta > 6) {
                             steps++;
                         }
-                        binding.steps.setText(steps.toString());
-                }
+                        binding.stepsTaken.setText(steps.toString());
+                    }
 
-            }
+                }
 
                 @Override
                 public void onAccuracyChanged(Sensor sensor, int i) {
@@ -132,25 +112,6 @@ public class RunActivity extends AppCompatActivity  {
 
             sensorManager.registerListener(stepDetector, sensor, SensorManager.SENSOR_DELAY_NORMAL);
         }
-
-    }
-
-//    public void getPedometer() {
-//
-//    }
-
-    public void onClickStart() {
-        running = true;
-    }
-
-    public void onClickStop() {
-        running = false;
-    }
-
-    public void onClickReset() {
-        running = false;
-        seconds = 0;
-        steps = 0;
     }
 
     private void runTimer() {

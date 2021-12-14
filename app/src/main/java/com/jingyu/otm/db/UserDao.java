@@ -18,11 +18,8 @@ public interface UserDao {
     @Update
     void updateUser(User user);
 
-//    @Delete
-//    void deleteUser(User user);
-//
-//    @Query("Delete from user")
-//    void deleteAllUsers();
+    @Query("Delete FROM user")
+    void deleteAllUsers();
 
     @Query("SELECT * FROM user")
     LiveData<List<User>> getAllUsers();

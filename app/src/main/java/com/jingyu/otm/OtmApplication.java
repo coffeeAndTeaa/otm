@@ -39,15 +39,21 @@ public class OtmApplication extends Application {
 
         @Override
         protected Void doInBackground(Void... voids) {
+            runDao.deleteAll();
+            userDao.deleteAllUsers();
+
             User Bruce = new User("Bruce", 1.91, 24, 100.0, "123456");
             User faker = new User("faker", 1.78, 25, 77.0, "123456");
             userDao.insertUser(Bruce);
             userDao.insertUser(faker);
-            Run r1 = new Run(Bruce.id_user, "Bruce First run", 10, 100);
-            Run r2 = new Run(Bruce.id_user, "Bruce Second run", 11, 101);
-            Run r3 = new Run(Bruce.id_user, "Bruce Third run", 12, 103);
-            Run r4 = new Run(faker.id_user, "faker First run", 10, 10);
-            Run r5 = new Run(faker.id_user, "faker First run", 10, 10);
+
+            User B = userDao.login(Bruce.name, Bruce.password);
+            User F = userDao.login(faker.name, faker.password);
+            Run r1 = new Run(B.id_user, "Bruce First run", 10, 100);
+            Run r2 = new Run(B.id_user, "Bruce Second run", 11, 101);
+            Run r3 = new Run(B.id_user, "Bruce Third run", 12, 103);
+            Run r4 = new Run(F.id_user, "faker First run", 10, 10);
+            Run r5 = new Run(F.id_user, "faker First run", 10, 10);
             runDao.insertRun(r1);
             runDao.insertRun(r2);
             runDao.insertRun(r3);

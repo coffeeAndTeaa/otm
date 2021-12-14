@@ -1,15 +1,25 @@
 package com.jingyu.otm.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.jingyu.otm.R;
+import com.jingyu.otm.activity.HomeActivity;
+import com.jingyu.otm.activity.RunActivity;
 import com.jingyu.otm.databinding.FragmentRunBinding;
+import com.jingyu.otm.repository.RunRepository;
+import com.jingyu.otm.viewModel.RecordViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +28,8 @@ import com.jingyu.otm.databinding.FragmentRunBinding;
  */
 public class RunFragment extends Fragment {
     private FragmentRunBinding binding;
+    private RecordViewModel viewModel;
+    private static final String TAG = "RunFragment";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,9 +72,46 @@ public class RunFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Long Id = ((HomeActivity)getActivity()).giveMeUserId();
+        Log.d(TAG, "now the user is" + Id.toString());
+        RunRepository repository = new RunRepository();
+        viewModel = new RecordViewModel(repository, Id);
+        RecyclerView recyclerView = binding.recyclerView;
+        ListAdapter adapter = new ListAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView.setAdapter(adapter);
+
+        viewModel.getAllRuns()
+                .observe(
+                            getViewLifecycleOwner(),
+                            runs -> {
+                                Log.d(TAG, "onViewCreated: "+ runs.size());
+                                adapter.setRuns(runs);
+                                int count = 0;
+                                for (int i = 0; i < runs.size(); i++) {
+                                    count += runs.get(i).steps;
+                                }
+                                binding.steps.setText("Total Steps " + count);
+                            }
+                        );
+
+        binding.newRun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), RunActivity.class)
+                        .putExtra("userId", Id));
+            }
+        });
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_run, container, false);
+        Log.d(TAG, "onCreateView: ");
+        binding = FragmentRunBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 }

@@ -20,9 +20,6 @@ import java.util.concurrent.ExecutionException;
 public class RunRepository {
 
     private final RunDataBase dataBase;
-    private LiveData<List<Run>> allRuns;
-
-//    private LiveData<List<Run>>
 
     public RunRepository() {
         dataBase = OtmApplication.getDataBase();
@@ -69,11 +66,12 @@ public class RunRepository {
         }
     }
 
-    public  LiveData<List<Run>> getAllRunsForUser(User user) throws ExecutionException, InterruptedException {
-        return new GetAllRunsForUserAsyncTask(dataBase.runDao()).execute(user).get();
+    public LiveData<List<Run>> getAllRunsForUser(Long userId)
+            throws ExecutionException, InterruptedException {
+            return new GetAllRunsForUserAsyncTask(dataBase.runDao()).execute(userId).get();
     }
 
-    private static class GetAllRunsForUserAsyncTask extends AsyncTask<User, Void, LiveData<List<Run>>> {
+    private static class GetAllRunsForUserAsyncTask extends AsyncTask<Long, Void, LiveData<List<Run>>> {
         private RunDao runDao;
 
         private GetAllRunsForUserAsyncTask(RunDao runDao) {
@@ -81,8 +79,8 @@ public class RunRepository {
         }
 
         @Override
-        protected LiveData<List<Run>> doInBackground(User... users) {
-            return runDao.getAllRunForUser(users[0].id_user);
+        protected LiveData<List<Run>> doInBackground(Long... users) {
+            return runDao.getAllRunForUser(users[0]);
         }
     }
 

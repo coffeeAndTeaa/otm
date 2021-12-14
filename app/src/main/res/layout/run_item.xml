@@ -1,30 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
     >
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
-
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="date"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/run_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/date"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Run"
@@ -36,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/run_name"
             android:text="Steps: " />
+
         <TextView
             android:id="@+id/run_duration"
             android:layout_width="wrap_content"
@@ -49,9 +40,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/run_duration"
             android:text="Calories Burned: " />
-
-
-
 
 
     </RelativeLayout>

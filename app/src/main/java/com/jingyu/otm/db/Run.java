@@ -2,6 +2,7 @@ package com.jingyu.otm.db;
 
 import static androidx.room.ForeignKey.CASCADE;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -12,6 +13,7 @@ public class Run {
     @PrimaryKey(autoGenerate = true)
     public Long id_run;
 
+    @NonNull
     public Long id_user;
 
     public String runName;
