@@ -11,6 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+// Jack adding these
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+
 import com.jingyu.otm.R;
 import com.jingyu.otm.activity.HomeActivity;
 import com.jingyu.otm.databinding.FragmentHomeBinding;
@@ -77,22 +82,36 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Long Id = ((HomeActivity)getActivity()).giveMeUserId();
+        Long Id = ((HomeActivity) getActivity()).giveMeUserId();
         Log.d(TAG, "now the user is" + Id.toString());
         RunRepository repository = new RunRepository();
         viewModel = new HomeViewModel(repository);
         viewModel.setUserId(Id);
+
         viewModel.getUser()
                 .observe(
                         getViewLifecycleOwner(),
                         user -> {
                             Log.d(TAG, "Username is " + user.name);
                             binding.displayUsername.setText(user.name);
+
                             Double bmi = repository.getTheBmiForUser(user);
-                            String BMI = String.format("BMI: %2.1f",bmi);
+                            String BMI = String.format("BMI: %2.1f", bmi);
                             binding.displayBMI.setText(BMI);
+
+                            float stepCt = (float) 11.1;
+                            String stepStr = String.format("Total Steps: %.0f", stepCt);
+                            binding.displaySteps.setText(stepStr);
+                            // TODO: Get the step count from the runs
+
+                            //public View onCreateView(...){
+                            //    tabsmain xxx = (tabsmain)getActivity();
+                            //    lc.setChecked(xxx.lf_ch);
+                            //}
                         }
                 );
+
+
 
 
 

@@ -58,11 +58,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.RunsViewHolder
     @Override
     public void onBindViewHolder(@NonNull RunsViewHolder holder, int position) {
         Run currentRun = runs.get(position);
-        holder.runNameView.setText("Running name " + currentRun.runName); // TODO: Fix this runName not populating properly.
-        holder.runDurationView.setText("Running duration " + currentRun.seconds + " s");
-        holder.runStepView.setText("Running steps" + currentRun.steps.toString());
+        holder.runNameView.setText(currentRun.runName + ":");
+        holder.runDurationView.setText("Run duration: " + currentRun.seconds + " (s)");
+        holder.runStepView.setText("Step count: " + currentRun.steps.toString());
         Double cal = currentRun.steps * 0.04;
-        holder.caloriesView.setText("Burned cal " + cal.toString() + " cal");
+        holder.caloriesView.setText("Calories burned: " + cal.toString() + " (cal)");
     }
 
     @Override

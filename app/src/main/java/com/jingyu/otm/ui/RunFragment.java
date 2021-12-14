@@ -93,7 +93,7 @@ public class RunFragment extends Fragment {
                                 for (int i = 0; i < runs.size(); i++) {
                                     count += runs.get(i).steps;
                                 }
-                                binding.steps.setText("Total Steps " + count);
+                                binding.steps.setText("Total Steps: " + count);
                             }
                         );
 
