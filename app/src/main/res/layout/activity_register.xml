@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20sp"
-        android:text="Register user"
+        android:text="Register as new user"
         android:textAlignment="center"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -78,7 +78,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="50sp"
         android:backgroundTint="@android:color/holo_green_light"
-        android:text="Already have an account" />
+        android:text="I already have an account" />
 
 
 </LinearLayout>
