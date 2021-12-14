@@ -27,7 +27,6 @@ public class User {
         this.age = age;
         this.weight = weight;
         this.password = password;
-//        bmi = weight / (height * height);
     }
 
 }

@@ -108,4 +108,26 @@ public class RunRepository {
         }
     }
 
+    public LiveData<User> getUserById(Long userId) {
+        try {
+            return new GetUserByIdAsyncTask(dataBase.userDao()).execute(userId).get();
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
+    private static class GetUserByIdAsyncTask extends AsyncTask<Long, Void, LiveData<User>> {
+        private UserDao userDao;
+
+        private GetUserByIdAsyncTask(UserDao userDao) {
+            this.userDao = userDao;
+        }
+
+        @Override
+        protected LiveData<User> doInBackground(Long... longs) {
+            return userDao.getUser(longs[0]);
+        }
+    }
+
 }

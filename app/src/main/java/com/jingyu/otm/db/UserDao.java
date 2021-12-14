@@ -33,4 +33,7 @@ public interface UserDao {
     @Query("SELECT * FROM user Where id_user=(:id)")
     User getUserById(Long id);
 
+    @Query("SELECT * FROM user Where id_user=(:id)")
+    LiveData<User> getUser(Long id);
+
 }

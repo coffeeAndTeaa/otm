@@ -16,7 +16,10 @@ import com.jingyu.otm.activity.HomeActivity;
 import com.jingyu.otm.databinding.FragmentHomeBinding;
 import com.jingyu.otm.db.User;
 import com.jingyu.otm.repository.RunRepository;
+import com.jingyu.otm.viewModel.HomeViewModel;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -28,7 +31,8 @@ import java.util.concurrent.ExecutionException;
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
     FragmentHomeBinding binding;
-    private RunRepository repository;
+    private HomeViewModel viewModel;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,17 +79,20 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Long Id = ((HomeActivity)getActivity()).giveMeUserId();
         Log.d(TAG, "now the user is" + Id.toString());
-        User user;
-        try {
-            user = repository.getUser(Id);
-            binding.displayUsername.setText(user.name);
-
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        RunRepository repository = new RunRepository();
+        viewModel = new HomeViewModel(repository);
+        viewModel.setUserId(Id);
+        viewModel.getUser()
+                .observe(
+                        getViewLifecycleOwner(),
+                        user -> {
+                            Log.d(TAG, "Username is " + user.name);
+                            binding.displayUsername.setText(user.name);
+                            Double bmi = repository.getTheBmiForUser(user);
+                            String BMI = String.format("%2f",bmi);
+                            binding.displayBMI.setText(BMI);
+                        }
+                );
 
 
 
@@ -95,8 +102,12 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        repository = new RunRepository();
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String date = simpleDateFormat.format(calendar.getTime());
+        binding.displayDate.setText(date);
         return binding.getRoot();
+
     }
 }
