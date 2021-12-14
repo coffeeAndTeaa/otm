@@ -48,7 +48,7 @@ public class RunRepository {
 
 
     public void insertRun(Run run) {
-        new InsertRunAsyncTask(dataBase.runDao()).execute();
+        new InsertRunAsyncTask(dataBase.runDao()).execute(run);
     }
 
     private static class InsertRunAsyncTask extends AsyncTask<Run, Void, Void> {

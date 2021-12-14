@@ -8,6 +8,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ public class RunActivity extends AppCompatActivity  {
     private Integer steps = 0;
     private boolean running;
     RunRepository repo;
+    private static final String TAG = "RunActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +71,11 @@ public class RunActivity extends AppCompatActivity  {
                 Bundle extras = getIntent().getExtras();
                 Long userId = extras.getLong("userId");
                 String input = binding.runName.getText().toString();
-                if (input == null) {
+                if (input.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "you need to give a run name", Toast.LENGTH_SHORT).show();
                 } else {
                     Run run = new Run(userId, "this is a test run", seconds, steps);
+                    Log.d(TAG, "onClick: "+ run.runName);
                     repo.insertRun(run);
                     finish();
                 }
