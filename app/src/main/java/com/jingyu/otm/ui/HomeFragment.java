@@ -101,27 +101,30 @@ public class HomeFragment extends Fragment {
                             String BMI = String.format("BMI: %2.1f", bmi);
                             binding.displayBMI.setText(BMI);
 
-                            List<Run> runs = null;
+//                            List<Run> runs = null;
+//
+//                            int stepCt = 0;
+//                            try {
+//
+//                                runs = repository.getAllRunsForUser(user.id_user).getValue();
+//                                // TODO: This is still coming back null
+//                                if(runs != null) {
+//                                    for (Run r : runs) {
+//                                        stepCt += r.steps;
+//                                    }
+//                                } else {
+//                                    Log.d(TAG, "Runs is an empty list.");
+//                                }
+//                            } catch (ExecutionException e) {
+//                                e.printStackTrace();
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
 
-                            int stepCt = 0;
-                            try {
-
-                                runs = repository.getAllRunsForUser(user.id_user).getValue();
-                                // TODO: This is still coming back null
-                                if(runs != null) {
-                                    for (Run r : runs) {
-                                        stepCt += r.steps;
-                                    }
-                                } else {
-                                    Log.d(TAG, "Runs is an empty list.");
-                                }
-                            } catch (ExecutionException e) {
-                                e.printStackTrace();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-
-                            String stepStr = String.format("Total Steps: %d", stepCt);
+                            //String stepStr = String.format("Total Steps: %d", stepCt);
+                            Double sugbmi = user.weight / (user.height * user.height);
+                            int adjustedSteps = (int)(sugbmi % 100);
+                            String stepStr = String.format("Suggested steps: %d", adjustedSteps * 500);
                             binding.displaySteps.setText(stepStr);
 
                         }
