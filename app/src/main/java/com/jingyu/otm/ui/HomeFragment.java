@@ -19,12 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.jingyu.otm.R;
 import com.jingyu.otm.activity.HomeActivity;
 import com.jingyu.otm.databinding.FragmentHomeBinding;
+import com.jingyu.otm.db.Run;
 import com.jingyu.otm.db.User;
 import com.jingyu.otm.repository.RunRepository;
 import com.jingyu.otm.viewModel.HomeViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -83,7 +85,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Long Id = ((HomeActivity) getActivity()).giveMeUserId();
-        Log.d(TAG, "now the user is" + Id.toString());
+        Log.d(TAG, "now the user is: " + Id.toString());
         RunRepository repository = new RunRepository();
         viewModel = new HomeViewModel(repository);
         viewModel.setUserId(Id);
@@ -99,15 +101,29 @@ public class HomeFragment extends Fragment {
                             String BMI = String.format("BMI: %2.1f", bmi);
                             binding.displayBMI.setText(BMI);
 
-                            float stepCt = (float) 11.1;
-                            String stepStr = String.format("Total Steps: %.0f", stepCt);
-                            binding.displaySteps.setText(stepStr);
-                            // TODO: Get the step count from the runs
+                            List<Run> runs = null;
 
-                            //public View onCreateView(...){
-                            //    tabsmain xxx = (tabsmain)getActivity();
-                            //    lc.setChecked(xxx.lf_ch);
-                            //}
+                            int stepCt = 0;
+                            try {
+
+                                runs = repository.getAllRunsForUser(user.id_user).getValue();
+                                // TODO: This is still coming back null
+                                if(runs != null) {
+                                    for (Run r : runs) {
+                                        stepCt += r.steps;
+                                    }
+                                } else {
+                                    Log.d(TAG, "Runs is an empty list.");
+                                }
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                            String stepStr = String.format("Total Steps: %d", stepCt);
+                            binding.displaySteps.setText(stepStr);
+
                         }
                 );
 
