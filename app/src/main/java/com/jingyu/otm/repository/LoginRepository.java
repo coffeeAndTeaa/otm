@@ -8,6 +8,7 @@ import com.jingyu.otm.db.RunDataBase;
 import com.jingyu.otm.db.User;
 import com.jingyu.otm.db.UserDao;
 
+import java.nio.channels.AsynchronousChannelGroup;
 import java.util.concurrent.ExecutionException;
 
 public class LoginRepository {
@@ -21,6 +22,26 @@ public class LoginRepository {
     public User login(String name, String password) throws ExecutionException, InterruptedException {
         LoginParam param = new LoginParam(name, password);
         return new LoginAsyncTask(dataBase.userDao()).execute(param).get();
+    }
+
+    public User checkNameExist(String name) {
+        try {
+            return new checkNameExistAsyncTask(dataBase.userDao()).execute(name).get();
+        } catch (Exception e) {}
+        return null;
+    }
+
+    private static class checkNameExistAsyncTask extends AsyncTask<String, Void, User> {
+        private UserDao userDao;
+
+        private checkNameExistAsyncTask(UserDao userDao) {
+            this.userDao = userDao;
+        }
+
+        @Override
+        protected User doInBackground(String... strings) {
+            return userDao.checkName(strings[0]);
+        }
     }
 
     private static class LoginParam {

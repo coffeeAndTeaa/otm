@@ -2,8 +2,10 @@ package com.jingyu.otm.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,10 +16,11 @@ import com.jingyu.otm.repository.LoginRepository;
 public class RegisterActivity extends AppCompatActivity {
 
     ActivityRegisterBinding binding;
+    LoginRepository repository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
@@ -25,6 +28,13 @@ public class RegisterActivity extends AppCompatActivity {
         binding.register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                LoginRepository repo = new LoginRepository();
+                if (repo.checkNameExist(binding.userName.getText().toString()) != null) {
+                    Log.d("register", "invalid username ");
+                    Toast.makeText(getApplicationContext(), "please input another username", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 User user = new User(
                         binding.userName.getText().toString(),
                         Double.parseDouble(binding.userHeight.getText().toString()),
@@ -32,33 +42,12 @@ public class RegisterActivity extends AppCompatActivity {
                         Double.parseDouble(binding.userWeight.getText().toString()),
                         binding.password.getText().toString()
                 );
-                
+
                 if (validateInput(user)) {
-//                    RunDataBase db = OtmApplication.getDataBase();
-//                    UserDao userDao = db.userDao();
-//                    userDao.insertUser(user);
-                    LoginRepository repo = new LoginRepository();
                     repo.insert(user);
                     Toast.makeText(getApplicationContext(), "User registered!", Toast.LENGTH_SHORT).show();
-
-                    // Do insert operation
-//                    RunDataBase db = RunDataBase.getInstance(getApplicationContext());
-//                    UserDao userDao = db.userDao();
-//                    new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            // register the user
-//                            userDao.insertUser(user);
-//                            runOnUiThread(
-//                                    new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            Toast.makeText(getApplicationContext(), "User registered!", Toast.LENGTH_SHORT).show();
-//                                        }
-//                                    }
-//                            );
-//                        }
-//                    }).start();
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class)
+                    );
                 } else {
                     Toast.makeText(getApplicationContext(), "Fill all fields", Toast.LENGTH_SHORT).show();
                 }
