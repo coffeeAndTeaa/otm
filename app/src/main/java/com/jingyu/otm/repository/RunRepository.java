@@ -86,6 +86,9 @@ public class RunRepository {
 
     // get the bmi value
     public Double getTheBmiForUser(User user) {
+        if(user.height == 0) {
+            return 1.0;
+        }
         return user.weight / (user.height * user.height);
     }
 

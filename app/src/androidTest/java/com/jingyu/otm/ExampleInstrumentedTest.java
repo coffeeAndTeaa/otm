@@ -66,6 +66,8 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
+    // NOTE: For this test to pass, manually go into the emulator and add a user that way.
+    // this test will then pass when these criteria line up.
     public void recentlyRegisteredLogin() throws ExecutionException, InterruptedException {
         String name = "Jack";
         String password = "1234";
@@ -105,6 +107,10 @@ public class ExampleInstrumentedTest {
         assertEquals(userOut.age, 192, .1);
     }
 
+    // As before, this test requires a manually enterered user with the following
+    // stats to pass:
+    // Name: Jack
+    // Password: 1234
     @Test
     public void testBMI() throws ExecutionException, InterruptedException {
         String name = "Jack";
@@ -137,6 +143,7 @@ public class ExampleInstrumentedTest {
         String name = "Bruce";
         String password = "abc";
         User userInput = new User(name, 3.12, 192, 987.123, password);
+        User sameName = new User(name , 1.23, 921, 123.987, "abcd");
 
         // Login to the reposiory and get the database information
         LoginRepository repo = new LoginRepository();
@@ -146,39 +153,44 @@ public class ExampleInstrumentedTest {
         // Insert the previously made user into our database
         UserDao userDao = dataBase.userDao();
         userDao.insertUser(userInput); // This should fail
-
+        userDao.insertUser(sameName);
+        System.out.println("Reached this point");
         // TODO: ensure that this test fails later - it is currently passing.
-        /*
+
         // Attempt to fetch that user from the database
         User userOut = repo.login(name, password);
+        User userOut2 = repo.login(name, "abc");
+        User origUser = repo.login("Bruce", "123456");
 
         // Check if that user is valid
         assertNotNull(userOut);
-        assertEquals(userOut.name, "Candan");
-        assertEquals(userOut.weight, 987.123, .0001);
-        assertEquals(userOut.age, 192, .1);
-        */
+        assertNotNull(userOut2);
+        assertNotNull(origUser);
+
     }
 
 
     @Test
     public void ChangedInformation() throws ExecutionException, InterruptedException {
-        String name = "Jack";
-        String password = "1234";
+        String name = "Bruce";
+        String password = "123456";
 
         LoginRepository repo = new LoginRepository();
+        RunRepository runRepo = new RunRepository();
 
         User user = repo.login(name, password);
-        // TODO: Finish implementing this later after we make changes.
-        /*
-        repo.update();
+        User newUser = new User(name, 1.0, 1, 1.0, password);
+        runRepo.updateUser(newUser);
+
+        // get the new info
+        user = repo.login(name, password);
 
         assertNotNull(user);
-        assertEquals(user.name, "Jack");
-        assertEquals(user.weight, 233.0, .1);
-        assertEquals(user.age, 123, .1);
+        assertEquals(user.name, "Bruce");
+        assertEquals(user.weight, 100, .1);
+        assertEquals(user.age, 24, .1);
 
-         */
+
     }
 
     @Test
@@ -192,32 +204,19 @@ public class ExampleInstrumentedTest {
         // Login to Bruce's account
         User user = repo.login(name, password);
         assertNotNull(user);
-        System.out.println("Succesfull login to: " + user.name);
-        //Run r1 = new Run(Bruce.id_user, "Bruce First run", 10, 100);
 
         // Manually insert a run
         Run firstRun = new Run(user.id_user, "Bruce unit test", 1000, 333);
-        System.out.println("Created a run");
         runs.insertRun(firstRun);
-        System.out.println("Inserted a run");
 
         // Attempt to get the list of runs for the user
-        List<Run> runList = runs.getAllRunsForUser(user).getValue();
-        if (runList == null) {
-            System.out.println(" Run list is empty");
-        } else {
+        List<Run> runList = runs.getAllRunsForUser(user.id_user).getValue();
+        if (runList != null) {
             Run r1 = runList.get(0);
             //System.out.println("First run got");
             if(r1 != null) {
                 System.out.println("On his run Bruce went : " + r1.steps + " steps.");
             }
         }
-
-       // System.out.println("Run name: " + firstRun.runName);
-       // System.out.println("Run seconds: " + firstRun.seconds);
-       // System.out.println("Run steps: " + firstRun.steps);
-        // Check the steps for each run
-        // LiveData<List<Run>> getAllRunsForUser(User user)
-
     }
 }
