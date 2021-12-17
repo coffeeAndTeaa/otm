@@ -42,8 +42,8 @@ public class OtmApplication extends Application {
             runDao.deleteAll();
             userDao.deleteAllUsers();
 
-            User Bruce = new User("Bruce", 1.91, 24, 100.0, "123456");
-            User faker = new User("faker", 1.78, 25, 77.0, "123456");
+            User Bruce = new User("Bruce", 1.91, 24, 100.0, "123456", "Male");
+            User faker = new User("faker", 1.78, 25, 77.0, "123456", "Male");
             userDao.insertUser(Bruce);
             userDao.insertUser(faker);
 
