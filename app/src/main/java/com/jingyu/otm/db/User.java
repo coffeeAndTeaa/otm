@@ -23,7 +23,12 @@ public class User {
 
     public User(String name, Double height, Integer age, Double weight, String password) {
         this.name = name;
-        this.height = height;
+        if (height == 0) {
+            this.height = 1.0;
+        } else {
+            this.height = height;
+        }
+
         this.age = age;
         this.weight = weight;
         this.password = password;

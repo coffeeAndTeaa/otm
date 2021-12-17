@@ -11,15 +11,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+// Jack adding these
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+
 import com.jingyu.otm.R;
 import com.jingyu.otm.activity.HomeActivity;
 import com.jingyu.otm.databinding.FragmentHomeBinding;
+import com.jingyu.otm.db.Run;
 import com.jingyu.otm.db.User;
 import com.jingyu.otm.repository.RunRepository;
 import com.jingyu.otm.viewModel.HomeViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -77,22 +84,53 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Long Id = ((HomeActivity)getActivity()).giveMeUserId();
-        Log.d(TAG, "now the user is" + Id.toString());
+        Long Id = ((HomeActivity) getActivity()).giveMeUserId();
+        Log.d(TAG, "now the user is: " + Id.toString());
         RunRepository repository = new RunRepository();
         viewModel = new HomeViewModel(repository);
         viewModel.setUserId(Id);
+
         viewModel.getUser()
                 .observe(
                         getViewLifecycleOwner(),
                         user -> {
                             Log.d(TAG, "Username is " + user.name);
                             binding.displayUsername.setText(user.name);
+
                             Double bmi = repository.getTheBmiForUser(user);
-                            String BMI = String.format("BMI: %2f",bmi);
+                            String BMI = String.format("BMI: %2.1f", bmi);
                             binding.displayBMI.setText(BMI);
+
+//                            List<Run> runs = null;
+//
+//                            int stepCt = 0;
+//                            try {
+//
+//                                runs = repository.getAllRunsForUser(user.id_user).getValue();
+//                                // TODO: This is still coming back null
+//                                if(runs != null) {
+//                                    for (Run r : runs) {
+//                                        stepCt += r.steps;
+//                                    }
+//                                } else {
+//                                    Log.d(TAG, "Runs is an empty list.");
+//                                }
+//                            } catch (ExecutionException e) {
+//                                e.printStackTrace();
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+
+                            //String stepStr = String.format("Total Steps: %d", stepCt);
+                            Double sugbmi = user.weight / (user.height * user.height);
+                            int adjustedSteps = (int)(sugbmi % 100);
+                            String stepStr = String.format("Suggested steps: %d", adjustedSteps * 500);
+                            binding.displaySteps.setText(stepStr);
+
                         }
                 );
+
+
 
 
 

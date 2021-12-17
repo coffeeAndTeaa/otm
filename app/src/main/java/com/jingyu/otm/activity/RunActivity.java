@@ -76,12 +76,12 @@ public class RunActivity extends AppCompatActivity  {
                 if (input.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "you need to give a run name", Toast.LENGTH_SHORT).show();
                 } else {
+
                     Run run = new Run(userId, input, seconds, steps);
                     Log.d(TAG, "onClick: "+ run.runName);
                     repo.insertRun(run);
                     startActivity(new Intent(RunActivity.this, HomeActivity.class)
                                     .putExtra("userId", userId));
-//                    finish();
                 }
             }
         });

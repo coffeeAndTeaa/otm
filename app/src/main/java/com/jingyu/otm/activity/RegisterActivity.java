@@ -2,6 +2,7 @@ package com.jingyu.otm.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,25 +46,8 @@ public class RegisterActivity extends AppCompatActivity {
                 if (validateInput(user)) {
                     repo.insert(user);
                     Toast.makeText(getApplicationContext(), "User registered!", Toast.LENGTH_SHORT).show();
-
-                    // Do insert operation
-//                    RunDataBase db = RunDataBase.getInstance(getApplicationContext());
-//                    UserDao userDao = db.userDao();
-//                    new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            // register the user
-//                            userDao.insertUser(user);
-//                            runOnUiThread(
-//                                    new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            Toast.makeText(getApplicationContext(), "User registered!", Toast.LENGTH_SHORT).show();
-//                                        }
-//                                    }
-//                            );
-//                        }
-//                    }).start();
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class)
+                    );
                 } else {
                     Toast.makeText(getApplicationContext(), "Fill all fields", Toast.LENGTH_SHORT).show();
                 }
