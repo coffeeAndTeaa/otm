@@ -86,7 +86,7 @@ public class ExampleInstrumentedTest {
         // Create a new user
         String name = "Candan";
         String password = "abc";
-        User userInput = new User(name, 3.12, 192, 987.123, password);
+        User userInput = new User(name, 3.12, 192, 987.123, password, "Male");
 
         // Login to the reposiory and get the database information
         LoginRepository repo = new LoginRepository();
@@ -142,8 +142,8 @@ public class ExampleInstrumentedTest {
         // Create a new user
         String name = "Bruce";
         String password = "abc";
-        User userInput = new User(name, 3.12, 192, 987.123, password);
-        User sameName = new User(name , 1.23, 921, 123.987, "abcd");
+        User userInput = new User(name, 3.12, 192, 987.123, password, "Male");
+        User sameName = new User(name , 1.23, 921, 123.987, "abcd", "Male");
 
         // Login to the reposiory and get the database information
         LoginRepository repo = new LoginRepository();
@@ -179,7 +179,7 @@ public class ExampleInstrumentedTest {
         RunRepository runRepo = new RunRepository();
 
         User user = repo.login(name, password);
-        User newUser = new User(name, 1.0, 1, 1.0, password);
+        User newUser = new User(name, 1.0, 1, 1.0, password, "Male");
         runRepo.updateUser(newUser);
 
         // get the new info
