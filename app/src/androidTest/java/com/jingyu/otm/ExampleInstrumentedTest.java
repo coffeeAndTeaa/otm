@@ -152,7 +152,7 @@ public class ExampleInstrumentedTest {
 
         // Insert the previously made user into our database
         UserDao userDao = dataBase.userDao();
-        userDao.insertUser(userInput); // This should fail
+        userDao.insertUser(userInput);
         userDao.insertUser(sameName);
         System.out.println("Reached this point");
         // TODO: ensure that this test fails later - it is currently passing.
