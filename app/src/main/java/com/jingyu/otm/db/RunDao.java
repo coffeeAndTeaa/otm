@@ -18,4 +18,7 @@ public interface RunDao {
     @Query("DELETE FROM run")
     void deleteAll();
 
+    @Query("SELECT * FROM run Where time Between (:current - 86400000) AND (:current) ")
+    List<Run> getAllRunInDay(Long current);
+
 }

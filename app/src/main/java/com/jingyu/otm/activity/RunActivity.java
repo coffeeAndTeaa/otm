@@ -2,6 +2,8 @@ package com.jingyu.otm.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -74,10 +76,12 @@ public class RunActivity extends AppCompatActivity  {
                 if (input.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "you need to give a run name", Toast.LENGTH_SHORT).show();
                 } else {
-                    Run run = new Run(userId, "this is a test run", seconds, steps);
+                    Run run = new Run(userId, input, seconds, steps);
                     Log.d(TAG, "onClick: "+ run.runName);
                     repo.insertRun(run);
-                    finish();
+                    startActivity(new Intent(RunActivity.this, HomeActivity.class)
+                                    .putExtra("userId", userId));
+//                    finish();
                 }
             }
         });
