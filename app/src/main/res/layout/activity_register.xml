@@ -22,7 +22,7 @@
         android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20sp"
+        android:layout_margin="5sp"
         android:gravity="center_vertical"
         android:hint="Enter username" />
 
@@ -30,7 +30,7 @@
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20sp"
+        android:layout_margin="5sp"
         android:gravity="center_vertical"
         android:hint="Enter password"
         android:inputType="textPassword" />
@@ -39,7 +39,7 @@
         android:id="@+id/userHeight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20sp"
+        android:layout_margin="5sp"
         android:gravity="center_vertical"
         android:hint="Enter height (m)"
         android:inputType="number" />
@@ -48,7 +48,7 @@
         android:id="@+id/userWeight"
         android:layout_width="423dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20sp"
+        android:layout_margin="5sp"
         android:gravity="center_vertical"
         android:hint="Enter weight (kg)"
         android:inputType="numberDecimal" />
@@ -57,10 +57,19 @@
         android:id="@+id/userAge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20sp"
+        android:layout_margin="5sp"
         android:gravity="center_vertical"
         android:hint="Enter age"
         android:inputType="number" />
+
+    <EditText
+        android:id="@+id/gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5sp"
+        android:gravity="center_vertical"
+        android:hint="Enter gender"
+        />
 
     <Button
         android:id="@+id/register"

@@ -21,12 +21,16 @@ public class User {
 
     public String password;
 
-    public User(String name, Double height, Integer age, Double weight, String password) {
+    public String gender;
+
+    public User(String name, Double height, Integer age,
+                Double weight, String password, String gender) {
         this.name = name;
         this.height = height;
         this.age = age;
         this.weight = weight;
         this.password = password;
+        this.gender = gender;
     }
 
 }

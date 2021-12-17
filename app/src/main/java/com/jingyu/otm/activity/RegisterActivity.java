@@ -39,7 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
                         Double.parseDouble(binding.userHeight.getText().toString()),
                         Integer.parseInt(binding.userAge.getText().toString()),
                         Double.parseDouble(binding.userWeight.getText().toString()),
-                        binding.password.getText().toString()
+                        binding.password.getText().toString(),
+                        binding.gender.getText().toString()
                 );
 
                 if (validateInput(user)) {
