@@ -1,5 +1,6 @@
 package com.jingyu.otm.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import com.jingyu.otm.R;
 import com.jingyu.otm.activity.HomeActivity;
 import com.jingyu.otm.activity.RunActivity;
+import com.jingyu.otm.activity.SuggestionActivity;
 import com.jingyu.otm.databinding.FragmentRunBinding;
 import com.jingyu.otm.repository.RunRepository;
 import com.jingyu.otm.viewModel.RecordViewModel;
@@ -101,7 +103,7 @@ public class RunFragment extends Fragment {
         binding.newRun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), RunActivity.class)
+                startActivity(new Intent(getActivity(), SuggestionActivity.class)
                         .putExtra("userId", Id));
             }
         });
