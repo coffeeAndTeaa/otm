@@ -29,7 +29,7 @@ public class SuggestionActivity extends AppCompatActivity {
             userId = extras.getLong("userId");
             //The key argument here must match that used in the other activity
         }
-        repository = new SuggestionRepository();
+        repository = new SuggestionRepository(userId);
         steps = repository.getStepsForToday();
         binding.steps.setText(steps.toString());
         binding.submit.setOnClickListener(new View.OnClickListener() {

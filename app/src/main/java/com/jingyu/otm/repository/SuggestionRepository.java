@@ -14,16 +14,29 @@ import java.util.concurrent.ExecutionException;
 public class SuggestionRepository {
 
     private final RunDataBase dataBase;
+    private Long id;
 
-    public SuggestionRepository() {
+    public SuggestionRepository(Long id) {
         dataBase = OtmApplication.getDataBase();
+        this.id = id;
     }
 
     public List<Run> RunForToday(Long current) throws ExecutionException, InterruptedException {
-        return new RunAsyncTask(dataBase.runDao()).execute(current).get();
+        Param temp = new Param(current, id);
+        return new RunAsyncTask(dataBase.runDao()).execute(temp).get();
     }
 
-    private static class RunAsyncTask extends AsyncTask<Long, Void, List<Run>> {
+    private static class Param {
+        Long current;
+        Long id;
+
+        private Param (Long current, Long id) {
+            this.id = id;
+            this.current = current;
+        }
+    }
+
+    private static class RunAsyncTask extends AsyncTask<Param, Void, List<Run>> {
         private final RunDao runDao;
 
         private RunAsyncTask(RunDao runDao) {
@@ -31,8 +44,8 @@ public class SuggestionRepository {
         }
 
         @Override
-        protected List<Run> doInBackground(Long... longs) {
-            return runDao.getAllRunInDay(longs[0]);
+        protected List<Run> doInBackground(Param... longs) {
+            return runDao.getAllRunInDay(longs[0].current, longs[0].id);
         }
     }
 
